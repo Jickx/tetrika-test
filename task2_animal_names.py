@@ -53,13 +53,13 @@ def main():
         animals_names.extend(animals)
         ctr += 1
         next_url = get_next_url(page_html)
-        print(f'========  Добавлено страниц: {ctr:4}  ========')
+        print(f'========  Добавлено страниц: {ctr:3}  ========')
         if not next_url:
             break
     animals_count = get_animal_count(animals_names)
     print(animals_count)
     with open('file.csv', 'w') as file:
-        file.write(str(animals_count))
+        file.write(str(animals_names))
 
 
 if __name__ == '__main__':
