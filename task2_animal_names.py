@@ -14,7 +14,7 @@ def download_page(url: str) -> str:
 def get_animal_list(html: str) -> list:
     animals_list = []
     soup = bs(html, 'html.parser')
-    animals = soup.find("div", {"class": "mw-category"}).find_all('li')
+    animals = soup.find('div', {'class': 'mw-category'}).find_all('li')
     for animal in animals:
         animals_list.append(animal.text)
     return animals_list
@@ -53,13 +53,14 @@ def main():
         animals_names.extend(animals)
         ctr += 1
         next_url = get_next_url(page_html)
-        print(f'========  Добавлено страниц: {ctr:3}  ========')
+        # print(f'========  Добавлено страниц: {ctr:3}  ========')
         if not next_url:
             break
     animals_count = get_animal_count(animals_names)
-    print(animals_count)
-    with open('file.csv', 'w') as file:
-        file.write(str(animals_names))
+    for k, v in animals_count.items():
+        print(f'{k}: {v}')
+    # with open('file.csv', 'w') as file:
+    #     file.write(str(animals_names))
 
 
 if __name__ == '__main__':
