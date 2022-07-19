@@ -1,6 +1,6 @@
 from urllib.request import urlopen
 from urllib.parse import urljoin
-from urllib.error import URLError, HTTPError
+from urllib.error import URLError
 from bs4 import BeautifulSoup as bs
 from typing import Union
 
