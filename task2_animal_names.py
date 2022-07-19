@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 from urllib.parse import urljoin
+from urllib.error import URLError, HTTPError
 from bs4 import BeautifulSoup as bs
 from typing import Union
 
@@ -8,7 +9,12 @@ URL_BASE = 'https://ru.wikipedia.org/'
 
 
 def download_page(url: str) -> str:
-    return urlopen(url).read()
+    try:
+        page = urlopen(url).read()
+    except URLError as e:
+        print('Reason: ', e.reason)
+    else:
+        return page
 
 
 def get_animal_list(html: str) -> list:
@@ -53,7 +59,7 @@ def main():
         animals_names.extend(animals)
         ctr += 1
         next_url = get_next_url(page_html)
-        # print(f'========  Добавлено страниц: {ctr:3}  ========')
+        print(f'========  Добавлено страниц: {ctr:3}  ========')
         if not next_url:
             break
     animals_count = get_animal_count(animals_names)
